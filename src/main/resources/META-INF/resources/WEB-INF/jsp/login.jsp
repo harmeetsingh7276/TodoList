@@ -6,6 +6,6 @@
 		<h1>Heading 1</h1>
 		<h2>Heading 2</h2>
 
-		Welcome to Login
+		Welcome to Login => ${name}
 	</body>
 </html>
