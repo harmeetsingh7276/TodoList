@@ -1,12 +1,14 @@
 <html>
-	<head>
-		<title> Login </title>
-	</head>
-	<body>
-		<h1>Heading 1</h1>
-		<h2>Heading 2</h2>
 
-		Welcome to ${name}
+<head>
+	<title> Login </title>
+</head>
 
-	</body>
+<body>
+	<div class="container">
+		<h1>Welcome ${name}</h1>
+		<a href="list-todos">Manage</a> your todos
+	</div>
+</body>
+
 </html>
