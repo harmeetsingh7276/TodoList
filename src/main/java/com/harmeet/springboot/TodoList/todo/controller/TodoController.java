@@ -44,7 +44,7 @@ public class TodoController {
             return "todo";
         }
         String name = (String) model.get("name");
-        todoService.addTodo(name, todo.getDescription(), LocalDate.now().plusYears(1), false);
+        todoService.addTodo(name, todo.getDescription(), todo.getTargetDate(), false);
         return "redirect:list-todos";
     }
 
@@ -70,6 +70,7 @@ public class TodoController {
             return "todo";
         }
         String name = (String) model.get("name");
+        todo.setUserName(name);
         todoService.updateTodo(todo);
         return "redirect:list-todos";
     }
