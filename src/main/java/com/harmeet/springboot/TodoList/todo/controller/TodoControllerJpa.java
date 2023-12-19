@@ -17,13 +17,13 @@ import java.util.List;
 
 @Controller
 public class TodoControllerJpa {
-    private TodoService todoService;
+//    private TodoService todoService;
 
     private TodoRepository todoRepository;
 
-    public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
+    public TodoControllerJpa(TodoRepository todoRepository) {
         super();
-        this.todoService = todoService;
+//        this.todoService = todoService;
         this.todoRepository = todoRepository;
     }
 
