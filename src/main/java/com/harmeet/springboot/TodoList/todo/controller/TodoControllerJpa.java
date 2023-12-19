@@ -59,14 +59,16 @@ public class TodoControllerJpa {
 
     @RequestMapping("delete-todo")
     public String deleteTodos(@RequestParam int id) {
-        todoService.deleteById(id);
+//        todoService.deleteById(id);
+        todoRepository.deleteById(id);
         return "redirect:list-todos";
     }
 
     @RequestMapping(value = "update-todo", method = RequestMethod.GET)
     public String updateTodos(@RequestParam int id, ModelMap model) {
 //        todoService.updateById(id);
-        Todo todo = todoService.findById(id);
+//        Todo todo = todoService.findById(id);
+        Todo todo = todoRepository.findById(id).get();
         model.put("todo", todo);
         return "todo";
     }
@@ -79,7 +81,8 @@ public class TodoControllerJpa {
         }
         String name = (String) model.get("name");
         todo.setUserName(name);
-        todoService.updateTodo(todo);
+//        todoService.updateTodo(todo);
+        todoRepository.save(todo);
         return "redirect:list-todos";
     }
 
