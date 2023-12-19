@@ -1,5 +1,6 @@
 package com.harmeet.springboot.TodoList.todo.controller;
 
+import com.harmeet.springboot.TodoList.todo.dao.TodoRepository;
 import com.harmeet.springboot.TodoList.todo.model.Todo;
 import com.harmeet.springboot.TodoList.todo.service.TodoService;
 import jakarta.validation.Valid;
@@ -14,26 +15,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Controller
-public class TodoController {
+@Controller
+public class TodoControllerJpa {
     private TodoService todoService;
 
-    public TodoController(TodoService todoService) {
+    private TodoRepository todoRepository;
+
+    public TodoControllerJpa(TodoService todoService, TodoRepository todoRepository) {
         super();
         this.todoService = todoService;
+        this.todoRepository = todoRepository;
     }
 
     @RequestMapping("list-todos")
     public String listAllTodos(ModelMap model) {
-        String userName=getLoggedInUsername(model);
-        List<Todo> todos = todoService.findByUserName(userName);
+        String userName = getLoggedInUsername(model);
+        List<Todo> todos = todoRepository.findByUsername(userName);
         model.addAttribute("todos", todos);
         return "listTodos";
     }
 
     @RequestMapping(value = "add-todo", method = RequestMethod.GET)
     public String showNewTodo(ModelMap model) {
-        String name =getLoggedInUsername(model);
+        String name = getLoggedInUsername(model);
         Todo todo = new Todo(0, name, "", LocalDate.now().plusYears(1), false);
         model.put("todo", todo);
         return "todo";
@@ -77,7 +81,7 @@ public class TodoController {
         return "redirect:list-todos";
     }
 
-    private String getLoggedInUsername(ModelMap model){
+    private String getLoggedInUsername(ModelMap model) {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

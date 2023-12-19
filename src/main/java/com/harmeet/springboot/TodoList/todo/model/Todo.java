@@ -6,12 +6,13 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
+
 @Entity
 public class Todo {
     @Id
     @GeneratedValue
     private int id;
-    private String userName;
+    private String username;
     @Size(min = 10, message = "Enter at least 10 characters")
     private String description;
     private LocalDate targetDate;
@@ -26,11 +27,11 @@ public class Todo {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getDescription() {
@@ -59,17 +60,20 @@ public class Todo {
 
     public Todo(int id, String userName, String description, LocalDate targetDate, boolean done) {
         this.id = id;
-        this.userName = userName;
+        this.username = userName;
         this.description = description;
         this.targetDate = targetDate;
         this.done = done;
+    }
+
+    public Todo() {
     }
 
     @Override
     public String toString() {
         return "Todo{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", description='" + description + '\'' +
                 ", targetDate=" + targetDate +
                 ", done=" + done +
